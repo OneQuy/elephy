@@ -19,6 +19,7 @@ import { StorageKey_DownloadApp_ShowTutorialText } from '../Constants/StorageKey
 import ScaleUpView from '../../Common/Components/Effects/ScaleUpView';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { DeleteTempDirAsync } from '../../Common/FileUtils';
+import { AppName } from '../../Common/SpecificConstants';
 
 const TutorialText = 'Just copy your Youtube, Tiktok, Instagram,... link and tap Paste!'
 
@@ -307,7 +308,7 @@ const DownloadAllScreen = ({
                         }}
                         onPress={() => changeScreen('about')}
                     >
-                        ItsQuy{IsDev() ? '.' : 'F'}
+                        {AppName}{IsDev() ? '.' : 'F'}
                     </Text>
 
                     <View
