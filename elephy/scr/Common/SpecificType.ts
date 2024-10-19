@@ -64,9 +64,7 @@ export type RemoteConfig = { // CHANGE OPTIONAL
 
     // specific app
 
-    redirectService?: string,
-
-    enableGeminiHelper?: number,
+    dailyFreeDownloadCount?: number,
 }
 
 export type TruelyValueType = number | string | object | boolean

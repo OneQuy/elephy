@@ -15,11 +15,12 @@ import { IsDev } from '../../Common/IsDev';
 import DownloadResultView from './../Components/DownloadResultView';
 import ColorChangingView from '../../Common/Components/Effects/ColorChangingView';
 import { GetBooleanAsync, SetBooleanAsync } from '../../Common/AsyncStorageUtils';
-import { StorageKey_DownloadApp_ShowTutorialText } from '../Constants/StorageKey';
+import { StorageKey_DownloadApp_ShowTutorialText, StorageKey_DownloadAvailableCount } from '../Constants/StorageKey';
 import ScaleUpView from '../../Common/Components/Effects/ScaleUpView';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { DeleteTempDirAsync } from '../../Common/FileUtils';
 import { AppName } from '../../Common/SpecificConstants';
+import useAsyncStorage from '../Hooks/useAsyncStorage';
 
 const TutorialText = 'Just copy your Youtube, Tiktok, Instagram,... link and tap Paste!'
 
@@ -88,6 +89,14 @@ const DownloadAllScreen = ({
     const [showTutorialText, set_showTutorialText] = useState(false)
     const [errorText, set_errorText] = useState('')
     const scheme = useColorScheme()
+    const {
+        storedValue: downloadAvailableCount,
+        setValueAsync: setDownloadAvailableCountAsync,
+        isLoading
+    } = useAsyncStorage<number>(StorageKey_DownloadAvailableCount, 0);
+
+    console.log(downloadAvailableCount);
+
 
     // ref
     const bottomSheetRef = useRef<BottomSheet>(null);
