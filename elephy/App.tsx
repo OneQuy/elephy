@@ -1,5 +1,4 @@
-import { StyleSheet } from 'react-native'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { PostHogProvider } from 'posthog-react-native'
 import { PostHogKey_Production } from './Keys'
 import useAsyncHandle from './scr/Common/Hooks/useAsyncHandle'
