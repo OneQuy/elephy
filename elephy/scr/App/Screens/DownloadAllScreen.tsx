@@ -21,7 +21,7 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { DeleteTempDirAsync } from '../../Common/FileUtils';
 import { AppName } from '../../Common/SpecificConstants';
 import useAsyncStorage from '../Hooks/useAsyncStorage';
-import { GetDisplayDownloadAvailableCountAsync } from '../AppUtils';
+import { GetDisplayDownloadAvailableCountAsync, HandleCountAfterDownloadSuccessAsync } from '../AppUtils';
 
 const TutorialText = 'Just copy your Youtube, Tiktok, Instagram,... link and tap Paste!'
 
@@ -187,6 +187,9 @@ const DownloadAllScreen = ({
     }
 
 
+    const onPressNumberDownloadAvailableCount = () => {
+    }
+
     const onPressPasteAndDownloadAsync = async (quantity: number = 100) => {
         // reset
 
@@ -205,7 +208,7 @@ const DownloadAllScreen = ({
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
 
-        xhr.addEventListener('readystatechange', function () {
+        xhr.addEventListener('readystatechange', async function () {
             if (this.readyState !== this.DONE)
                 return
 
@@ -239,10 +242,14 @@ const DownloadAllScreen = ({
 
             // success
 
+            await HandleCountAfterDownloadSuccessAsync()
+
+            set_downloadAvailableCount(await GetDisplayDownloadAvailableCountAsync())
+
             set_downloadResultViewData(obj)
             set_showPopupSelectFileDownload(true)
             setStatus('free')
-
+            
             // if (quantity <= 1)
             //     downloadToLocal(this.responseText, quantity)
             // else {
@@ -500,7 +507,7 @@ const DownloadAllScreen = ({
                         paddingLeft: Outline.Big,
                         // backgroundColor: 'red',
                     }}
-                    onPress={undefined}
+                    onPress={onPressNumberDownloadAvailableCount}
                 >
                     {downloadAvailableCount}
                 </Text>
