@@ -273,7 +273,7 @@ const DownloadAllScreen = ({
                 joyfulColors
             ]) ?? []}
 
-            duration={status === 'handling' ? 300 : 5000}
+            duration={status === 'handling' ? 300 : 10000}
         >
             <SafeAreaView
                 pointerEvents={status === 'handling' ? 'none' : 'auto'}
