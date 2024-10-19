@@ -89,13 +89,14 @@ const DownloadAllScreen = ({
     const [showTutorialText, set_showTutorialText] = useState(false)
     const [errorText, set_errorText] = useState('')
     const scheme = useColorScheme()
-    const {
-        storedValue: downloadAvailableCount,
-        setValueAsync: setDownloadAvailableCountAsync,
-        isLoading
-    } = useAsyncStorage<number>(StorageKey_DownloadAvailableCount, 0);
 
-    console.log(downloadAvailableCount);
+    // const {
+    //     storedValue: downloadAvailableCount,
+    //     setValueAsync: setDownloadAvailableCountAsync,
+    //     isLoading
+    // } = useAsyncStorage<number>(StorageKey_DownloadAvailableCount, 0);
+
+    // console.log(downloadAvailableCount);
 
 
     // ref

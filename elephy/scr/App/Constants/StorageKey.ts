@@ -31,4 +31,5 @@ export const StorageKey_StartUsingAppTick = 'StorageKey_StartUsingAppTick'
 // specific
 
 export const StorageKey_DownloadApp_ShowTutorialText = 'StorageKey_DownloadApp_ShowTutorialText'
-export const StorageKey_DownloadAvailableCount = 'StorageKey_DownloadAvailableCount'
+export const StorageKey_DownloadApp_TodayTotalDownloadedSuccessCount = 'StorageKey_DownloadApp_TodayTotalDownloadedSuccessCount'
+export const StorageKey_DownloadApp_BoughtDowloadCountRemain = 'StorageKey_DownloadApp_BoughtDowloadCountRemain'
