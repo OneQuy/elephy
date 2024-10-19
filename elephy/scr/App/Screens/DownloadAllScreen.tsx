@@ -21,6 +21,7 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { DeleteTempDirAsync } from '../../Common/FileUtils';
 import { AppName } from '../../Common/SpecificConstants';
 import useAsyncStorage from '../Hooks/useAsyncStorage';
+import { GetDisplayDownloadAvailableCountAsync } from '../AppUtils';
 
 const TutorialText = 'Just copy your Youtube, Tiktok, Instagram,... link and tap Paste!'
 
@@ -88,18 +89,8 @@ const DownloadAllScreen = ({
     const [downloadResultViewData, set_downloadResultViewData] = useState<DownloadResultViewData | undefined>()
     const [showTutorialText, set_showTutorialText] = useState(false)
     const [errorText, set_errorText] = useState('')
+    const [downloadAvailableCount, set_downloadAvailableCount] = useState(0)
     const scheme = useColorScheme()
-
-    // const {
-    //     storedValue: downloadAvailableCount,
-    //     setValueAsync: setDownloadAvailableCountAsync,
-    //     isLoading
-    // } = useAsyncStorage<number>(StorageKey_DownloadAvailableCount, 0);
-
-    // console.log(downloadAvailableCount);
-
-
-    // ref
     const bottomSheetRef = useRef<BottomSheet>(null);
 
     const reset = () => {
@@ -273,6 +264,8 @@ const DownloadAllScreen = ({
     useEffect(() => {
         (async () => {
             set_showTutorialText(await GetBooleanAsync(StorageKey_DownloadApp_ShowTutorialText, true))
+
+            set_downloadAvailableCount(await GetDisplayDownloadAvailableCountAsync())
         })()
     }, [])
 
@@ -509,7 +502,7 @@ const DownloadAllScreen = ({
                     }}
                     onPress={undefined}
                 >
-                    5
+                    {downloadAvailableCount}
                 </Text>
 
                 {/* api limit text (dev) */}
