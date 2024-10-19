@@ -4,7 +4,7 @@ import { PostHogProvider } from 'posthog-react-native'
 import { PostHogKey_Production } from './Keys'
 import useAsyncHandle from './scr/Common/Hooks/useAsyncHandle'
 import { SplashScreenLoader } from './scr/Common/SplashScreenLoader'
-import { Color_BG } from './scr/App/Hooks/useTheme'
+// import { Color_BG } from './scr/App/Hooks/useTheme'
 import SplashScreen from './scr/Common/Components/SplashScreen'
 import { GetAlternativeConfig } from './scr/Common/RemoteConfig'
 import ScreenNavigator from './scr/App/ScreenNavigator'
@@ -16,11 +16,11 @@ const App = () => {
   // const [showWelcomeScreen, set_showWelcomeScreen] = useState(false)
   // const didShowedWelcomeScreenRef = useRef(false)
 
-  const style = useMemo(() => {
-    return StyleSheet.create({
-      master: { flex: 1, backgroundColor: Color_BG }
-    })
-  }, [])
+  // const style = useMemo(() => {
+  //   return StyleSheet.create({
+  //     master: { flex: 1, backgroundColor: Color_BG }
+  //   })
+  // }, [])
 
   // const onPressStartWelcomeScreen = useCallback(() => {
   //   SetBooleanAsync(StorageKey_ShowedWelcomeScreen, true)
