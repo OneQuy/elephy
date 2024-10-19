@@ -1,4 +1,4 @@
-package com.elephy
+package com.onequy.elephy
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

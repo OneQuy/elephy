@@ -1,4 +1,4 @@
-package com.elephy
+package com.onequy.elephy
 
 import android.app.Application
 import com.facebook.react.PackageList
