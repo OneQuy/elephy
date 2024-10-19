@@ -484,7 +484,25 @@ const DownloadAllScreen = ({
                     </ScaleUpView>
                 }
 
-                {/* api limit text */}
+                {/* download count number */}
+                <Text
+                    adjustsFontSizeToFit
+                    numberOfLines={1}
+                    style={{
+                        textAlign: 'left',
+                        fontSize: WindowMaxSize * 0.05,
+                        fontWeight: '200',
+                        color: 'black',
+                        paddingBottom: Outline.Big,
+                        paddingLeft: Outline.Big,
+                        // backgroundColor: 'red',
+                    }}
+                    onPress={undefined}
+                >
+                    5
+                </Text>
+
+                {/* api limit text (dev) */}
                 {
                     rapidApiLimit && IsDev() &&
                     <Text
