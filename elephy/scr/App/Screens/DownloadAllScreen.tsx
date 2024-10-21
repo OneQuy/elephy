@@ -92,8 +92,9 @@ const DownloadAllScreen = ({
     const [errorText, set_errorText] = useState('')
     const [downloadAvailableCount, set_downloadAvailableCount] = useState(0)
     const scheme = useColorScheme()
-    const bottomSheetRef = useRef<BottomSheet>(null);
-    
+    const bottomSheetRef_DownloadResult = useRef<BottomSheet>(null);
+    const bottomSheetRef_IAP = useRef<BottomSheet>(null);
+
     const reset = () => {
         setStatus('free')
         set_errorText('')
@@ -191,6 +192,12 @@ const DownloadAllScreen = ({
     const onPressCloseTutorialText = () => {
         set_showTutorialText(false)
         SetBooleanAsync(StorageKey_DownloadApp_ShowTutorialText, false)
+    }
+
+
+    const onPressCloseAllPopup = () => {
+        bottomSheetRef_DownloadResult.current?.close()
+        bottomSheetRef_IAP.current?.close()
     }
 
 
@@ -540,7 +547,7 @@ const DownloadAllScreen = ({
 
             {/* view behind bottom sheet */}
             {
-                showPopupSelectFileDownload &&
+                (showPopupSelectFileDownload || showIAPPopup) &&
                 <View
                     style={{
                         backgroundColor: HexToRgb(scheme === 'dark' ? Color_Text : Color_BG, 0.3),
@@ -548,7 +555,7 @@ const DownloadAllScreen = ({
                         height: '100%',
                         position: 'absolute'
                     }}
-                    onTouchEnd={() => bottomSheetRef.current?.close()}
+                    onTouchEnd={onPressCloseAllPopup}
                 />
             }
 
@@ -556,7 +563,7 @@ const DownloadAllScreen = ({
             {
                 showIAPPopup &&
                 <BottomSheet
-                    // ref={bottomSheetRef}
+                    ref={bottomSheetRef_IAP}
                     onChange={handleBottomSheetChanges_IAP}
                     enablePanDownToClose
                     backgroundStyle={{
@@ -571,7 +578,7 @@ const DownloadAllScreen = ({
             {
                 showPopupSelectFileDownload && downloadResultViewData &&
                 <BottomSheet
-                    ref={bottomSheetRef}
+                    ref={bottomSheetRef_DownloadResult}
                     onChange={handleBottomSheetChanges_DownloadResult}
                     enablePanDownToClose
                     backgroundStyle={{
