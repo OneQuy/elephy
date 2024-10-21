@@ -9,6 +9,10 @@ import { AllIAPProducts } from '../../Common/SpecificConstants';
 
 const WindowMaxSize = GetWindowSize_Max()
 
+const IntroText = `⭐ Add a set number of downloads with no expiration.
+
+⭐ Only count when the file is downloaded or shared successfully.`
+
 const IAPView = ({
 }: {
     }) => {
@@ -23,6 +27,29 @@ const IAPView = ({
             gap: Gap.Normal,
         }}
         >
+            {/* title  */}
+            <Text
+                style={{
+                    color: scheme !== 'dark' ? Color_Text : Color_BG,
+                    fontSize: WindowMaxSize * 0.03,
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                }}>
+                Additional Downloads
+            </Text>
+
+            {/* intro  */}
+            <Text
+                // adjustsFontSizeToFit
+                // numberOfLines={2}
+                style={{
+                    color: scheme !== 'dark' ? Color_Text : Color_BG,
+                    fontSize: WindowMaxSize * 0.02,
+                    // fontWeight: 'bold',
+                }}>
+                {IntroText}
+            </Text>
+
             {
                 AllIAPProducts.map((iap) => {
                     return (
