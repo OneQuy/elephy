@@ -2,6 +2,21 @@
 
 // Created July 2024 (coding Vocaby)
 
+// Install steps:
+// 1. npm install --save react-native-purchases & npx pod install
+// 2. <uses-permission android:name="com.android.vending.BILLING" />
+// 3. Project Target -> Capabilities -> In-App Purchase
+// 4. Add app https://app.revenuecat.com
+//      4.1 App-Specific Share Secret: "App Information"  > "Manage" under the App-Specific Share Secret
+//      4.2 Input file: SubscriptionKey_L4N6JM797Z.p8
+//      4.3 Issuer ID: ff37b375-9d97-455f-8e63-03119b028cb8 (https://www.revenuecat.com/docs/assets/images/SCR-20240327-jygo-afa7c4d0a9d149e2975ebbabc689842c.png)
+//      4.4 App Store Connect API:
+//          4.4.1 Input file: AuthKey_8CL4MDR3H9.p8
+//          4.4.2 Issuer ID: ff37b375-9d97-455f-8e63-03119b028cb8
+//          4.4.3 Vendor number: 92639231 (https://www.revenuecat.com/docs/assets/images/SCR-20240327-kdtw-68de8f49409d1db164ffef1853c130cb.png)
+// 5. Get API keys (ios & android)
+
+92639231
 import { Platform } from "react-native";
 import Purchases, { PRODUCT_CATEGORY, PurchasesStoreProduct } from "react-native-purchases";
 import { CreateError, ExecuteWithTimeoutAsync, SafeArrayLength, TimeOutErrorObject, ToCanPrint, ToCanPrintError, UnknownErrorObject } from "../UtilsTS";
