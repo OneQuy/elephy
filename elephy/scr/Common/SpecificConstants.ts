@@ -21,31 +21,12 @@ export const ShareAppContent =
     `${ShortLink}`
 
 
-export const IapProductMax: IAPProduct = {
-    sku: 'vocaby_lifetime_max',
-    isConsumable: true,
-}
-
 export const AllIAPProducts: IAPProduct[] = [
     {
-        sku: 'vocaby_pro_best_sale',
+        sku: 'elephy_1_usd',
         isConsumable: true,
     },
-    {
-        sku: 'vocaby_2_usd',
-        isConsumable: true,
-    },
-    {
-        sku: 'vocaby_lifetime',
-        isConsumable: true,
-    },
-    {
-        sku: 'vocaby_lifetime_pro',
-        isConsumable: true,
-    },
-    IapProductMax
 ]
-
 
 export const DefaultAppContext: AppContextType = { // CHANGE OPTIONAL
     subscribedData: undefined,
