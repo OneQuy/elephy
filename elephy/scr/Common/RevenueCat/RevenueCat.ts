@@ -23,11 +23,11 @@ import { CreateError, ExecuteWithTimeoutAsync, SafeArrayLength, TimeOutErrorObje
 import { RevenueCat_Android, RevenueCat_iOS } from "../../../Keys";
 import { GetArrayAsync, SetArrayAsync } from "../AsyncStorageUtils";
 import { StorageKey_RevenueCatPackages } from "../../App/Constants/StorageKey";
-import { IAPProduct } from "../IAP/IAP";
 import { FirebaseDatabaseTimeOutMs } from "../Firebase/FirebaseDatabase";
 import { AllIAPProducts } from "../SpecificConstants";
 import { UserID } from "../UserID";
 import { Cheat } from "../Cheat";
+import { IAPProduct } from "../SpecificType";
 
 const IsLog = __DEV__
 
