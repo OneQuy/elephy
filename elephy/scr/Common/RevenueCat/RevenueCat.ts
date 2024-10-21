@@ -16,7 +16,6 @@
 //          4.4.3 Vendor number: 92639231 (https://www.revenuecat.com/docs/assets/images/SCR-20240327-kdtw-68de8f49409d1db164ffef1853c130cb.png)
 // 5. Get API keys (ios & android)
 
-92639231
 import { Platform } from "react-native";
 import Purchases, { PRODUCT_CATEGORY, PurchasesStoreProduct } from "react-native-purchases";
 import { CreateError, ExecuteWithTimeoutAsync, SafeArrayLength, TimeOutErrorObject, ToCanPrint, ToCanPrintError, UnknownErrorObject } from "../UtilsTS";
