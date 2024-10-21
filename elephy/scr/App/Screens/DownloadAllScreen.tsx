@@ -95,6 +95,8 @@ const DownloadAllScreen = ({
     const bottomSheetRef_DownloadResult = useRef<BottomSheet>(null);
     const bottomSheetRef_IAP = useRef<BottomSheet>(null);
 
+    const showingAnyPopup = showPopupSelectFileDownload || showIAPPopup
+
     const reset = () => {
         setStatus('free')
         set_errorText('')
@@ -291,6 +293,7 @@ const DownloadAllScreen = ({
         })()
     }, [])
 
+
     return (
         <ColorChangingView
             colors={PickRandomElement([
@@ -365,7 +368,7 @@ const DownloadAllScreen = ({
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    opacity: showPopupSelectFileDownload ? 0 : 1,
+                    opacity: showingAnyPopup ? 0 : 1,
                     // backgroundColor: 'purple'
                 }}
                 >
@@ -481,6 +484,7 @@ const DownloadAllScreen = ({
                             justifyContent: 'flex-start',
                             flexDirection: 'row',
                             gap: Gap.Normal,
+                            opacity: showingAnyPopup ? 0 : 1,
                             // width: '100%',
                         }}
                     >
@@ -520,6 +524,7 @@ const DownloadAllScreen = ({
                         color: 'black',
                         paddingBottom: Outline.Big,
                         paddingLeft: Outline.Big,
+                        opacity: showingAnyPopup ? 0 : 1,
                         // backgroundColor: 'red',
                     }}
                     onPress={onPressNumberDownloadAvailableCount}
@@ -535,6 +540,7 @@ const DownloadAllScreen = ({
                         numberOfLines={1}
 
                         style={{
+                            opacity: showingAnyPopup ? 0 : 1,
                             textAlign: 'left',
                             fontSize: WindowMaxSize * 0.02,
                             color: 'gray',
