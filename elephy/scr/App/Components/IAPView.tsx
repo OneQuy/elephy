@@ -71,7 +71,7 @@ const IAPView = ({
                                     fontSize: WindowMaxSize * 0.03,
                                     fontWeight: 'bold',
                                 }}>
-                                {iap.displayName}
+                                +{iap.displayName}
                             </Text>
                             <Text
                                 style={{
