@@ -163,7 +163,7 @@ const DownloadResultView = ({
                 renderItem={renderCell}
                 keyExtractor={(item) => item.url}
                 numColumns={1}
-                style={{ flex: 1, width: '100%' }}
+                style={{ maxHeight: WindowMaxSize * 0.5, width: '100%' }}
                 contentContainerStyle={{ gap: Gap.Normal, padding: Outline.Big, paddingTop: 0 }}
             />
         </View>
