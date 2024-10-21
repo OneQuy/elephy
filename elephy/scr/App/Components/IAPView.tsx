@@ -22,14 +22,25 @@ const IAPView = ({
                 style={{
                     padding: Outline.Big,
                     backgroundColor: scheme === 'dark' ? Color_Text : Color_BG,
-                    borderRadius: BorderRadius.Normal
+                    borderRadius: BorderRadius.Normal,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                 }}
             >
                 <Text
                     style={{
-                        color: scheme !== 'dark' ? Color_Text : Color_BG
+                        color: scheme !== 'dark' ? Color_Text : Color_BG,
+                        fontSize: WindowMaxSize * 0.03,
                     }}>
                     500 Downloads
+                </Text>
+                <Text
+                    style={{
+                        color: scheme !== 'dark' ? Color_Text : Color_BG,
+                        fontSize: WindowMaxSize * 0.02,
+                    }}>
+                    10.000đ
                 </Text>
             </TouchableOpacity>
         </BottomSheetView>
