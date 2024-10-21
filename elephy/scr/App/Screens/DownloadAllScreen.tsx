@@ -15,13 +15,13 @@ import { IsDev } from '../../Common/IsDev';
 import DownloadResultView from './../Components/DownloadResultView';
 import ColorChangingView from '../../Common/Components/Effects/ColorChangingView';
 import { GetBooleanAsync, SetBooleanAsync } from '../../Common/AsyncStorageUtils';
-import { StorageKey_DownloadApp_ShowTutorialText, StorageKey_DownloadAvailableCount } from '../Constants/StorageKey';
+import { StorageKey_DownloadApp_ShowTutorialText } from '../Constants/StorageKey';
 import ScaleUpView from '../../Common/Components/Effects/ScaleUpView';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { DeleteTempDirAsync } from '../../Common/FileUtils';
 import { AppName } from '../../Common/SpecificConstants';
-import useAsyncStorage from '../Hooks/useAsyncStorage';
 import { GetDisplayDownloadAvailableCountAsync, HandleCountAfterDownloadSuccessAsync } from '../AppUtils';
+import IAPView from '../Components/IAPView';
 
 const TutorialText = 'Just copy your Youtube, Tiktok, Instagram,... link and tap Paste!'
 
@@ -86,20 +86,21 @@ const DownloadAllScreen = ({
     const [status, setStatus] = useState<Status>('free');
     const [rapidApiLimit, set_rapidApiLimit] = useState<undefined | RapidApiLimit>();
     const [showPopupSelectFileDownload, set_showPopupSelectFileDownload] = useState(false)
+    const [showIAPPopup, set_showIAPPopup] = useState(false)
     const [downloadResultViewData, set_downloadResultViewData] = useState<DownloadResultViewData | undefined>()
     const [showTutorialText, set_showTutorialText] = useState(false)
     const [errorText, set_errorText] = useState('')
     const [downloadAvailableCount, set_downloadAvailableCount] = useState(0)
     const scheme = useColorScheme()
     const bottomSheetRef = useRef<BottomSheet>(null);
-
+    
     const reset = () => {
         setStatus('free')
         set_errorText('')
         set_downloadResultViewData(undefined)
     }
 
-    const handleBottomSheetChanges = useCallback((index: number) => {
+    const handleBottomSheetChanges_DownloadResult = useCallback((index: number) => {
         // console.log('handleSheetChanges', index);
 
         if (index < 0) { // closed bottom sheet
@@ -112,6 +113,12 @@ const DownloadAllScreen = ({
                 if (res !== null)
                     Alert.alert('Fail to delete downloaded files')
             })
+        }
+    }, [reset]);
+
+    const handleBottomSheetChanges_IAP = useCallback((index: number) => {
+        if (index < 0) { // closed bottom sheet
+            set_showIAPPopup(false)
         }
     }, [reset]);
 
@@ -188,6 +195,7 @@ const DownloadAllScreen = ({
 
 
     const onPressNumberDownloadAvailableCount = () => {
+        set_showIAPPopup(true)
     }
 
     const onPressPasteAndDownloadAsync = async (quantity: number = 100) => {
@@ -249,7 +257,7 @@ const DownloadAllScreen = ({
             set_downloadResultViewData(obj)
             set_showPopupSelectFileDownload(true)
             setStatus('free')
-            
+
             // if (quantity <= 1)
             //     downloadToLocal(this.responseText, quantity)
             // else {
@@ -544,12 +552,27 @@ const DownloadAllScreen = ({
                 />
             }
 
+            {/* iap popup */}
+            {
+                showIAPPopup &&
+                <BottomSheet
+                    // ref={bottomSheetRef}
+                    onChange={handleBottomSheetChanges_IAP}
+                    enablePanDownToClose
+                    backgroundStyle={{
+                        backgroundColor: HexToRgb(scheme === 'dark' ? Color_Text : Color_BG, 0.3),
+                    }}
+                >
+                    <IAPView />
+                </BottomSheet>
+            }
+
             {/* bottom sheet */}
             {
                 showPopupSelectFileDownload && downloadResultViewData &&
                 <BottomSheet
                     ref={bottomSheetRef}
-                    onChange={handleBottomSheetChanges}
+                    onChange={handleBottomSheetChanges_DownloadResult}
                     enablePanDownToClose
                     backgroundStyle={{
                         backgroundColor: HexToRgb(scheme === 'dark' ? Color_Text : Color_BG, 0.3),
