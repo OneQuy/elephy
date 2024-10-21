@@ -3,8 +3,7 @@
 // Created on 17 may 2024 (Coding Vocaby)
 
 import { createContext } from "react"
-import { AppContextType, OnSetSubcribeDataAsyncFuncParam } from "./SpecificType"
-import { IAPProduct } from "./IAP/IAP"
+import { AppContextType, IAPProduct, OnSetSubcribeDataAsyncFuncParam } from "./SpecificType"
 
 
 export const AndroidLink = "market://details?id=com.vocabulary_notification"
@@ -25,6 +24,12 @@ export const AllIAPProducts: IAPProduct[] = [
     {
         sku: 'elephy_1_usd',
         isConsumable: true,
+        displayName: '500 Downloads'
+    },
+    {
+        sku: 'elephy_10_usd',
+        isConsumable: true,
+        displayName: '5000 Downloads'
     },
 ]
 

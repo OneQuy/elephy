@@ -94,6 +94,11 @@ export type SplashScreenLoaderResult = { // CHANGE OPTIONAL
     subscribedDataOrUndefined: SubscribedData | undefined,
 }
 
+export type IAPProduct = { // MAYBE NO CHANGE
+    sku: string,
+    isConsumable: boolean,
+    displayName?: string,
+}
 
 export type SubscribedData = { // MAYBE NO CHANGE
     id: string,

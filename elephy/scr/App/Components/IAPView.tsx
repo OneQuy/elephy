@@ -32,13 +32,14 @@ const IAPView = ({
                     style={{
                         color: scheme !== 'dark' ? Color_Text : Color_BG,
                         fontSize: WindowMaxSize * 0.03,
+                        fontWeight: 'bold',
                     }}>
                     500 Downloads
                 </Text>
                 <Text
                     style={{
                         color: scheme !== 'dark' ? Color_Text : Color_BG,
-                        fontSize: WindowMaxSize * 0.02,
+                        fontSize: WindowMaxSize * 0.03,
                     }}>
                     10.000đ
                 </Text>
