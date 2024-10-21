@@ -15,6 +15,7 @@
 //          4.4.2 Issuer ID: ff37b375-9d97-455f-8e63-03119b028cb8
 //          4.4.3 Vendor number: 92639231 (https://www.revenuecat.com/docs/assets/images/SCR-20240327-kdtw-68de8f49409d1db164ffef1853c130cb.png)
 // 5. Get API keys (ios & android)
+// 6. Call PurchaseAsync('id')!
 
 import { Platform } from "react-native";
 import Purchases, { PRODUCT_CATEGORY, PurchasesStoreProduct } from "react-native-purchases";
