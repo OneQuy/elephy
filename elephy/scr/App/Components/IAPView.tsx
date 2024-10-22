@@ -6,6 +6,7 @@ import { Color_BG, Color_Text } from '../Hooks/useTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BottomSheetView } from '@gorhom/bottom-sheet';
 import { AllIAPProducts } from '../../Common/SpecificConstants';
+import { useRevenueCatProduct } from '../../Common/RevenueCat/useRevenueCatProduct';
 
 const WindowMaxSize = GetWindowSize_Max()
 
@@ -18,6 +19,7 @@ const IAPView = ({
     }) => {
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
+    const products = useRevenueCatProduct(AllIAPProducts)
 
     return (
         <BottomSheetView style={{

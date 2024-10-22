@@ -124,7 +124,11 @@ export class RevenueCat {
         }
     }
 
-    private static GetProductsAsync = async (allIAPProducts: IAPProduct[]): Promise<PurchasesStoreProduct[] | Error> => {
+    static GetProductsAsync = async (allIAPProducts: IAPProduct[]): Promise<PurchasesStoreProduct[] | Error> => {
+        // init
+
+        this.CheckInit()
+
         // get from local
 
         const localProducts = await GetArrayAsync<PurchasesStoreProduct>(StorageKey_RevenueCatPackages)
