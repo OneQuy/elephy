@@ -19,7 +19,7 @@ const IAPView = ({
     }) => {
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
-    const products = useRevenueCatProduct(AllIAPProducts)
+    const products = useRevenueCatProduct(AllIAPProducts[0])
 
     return (
         <BottomSheetView style={{

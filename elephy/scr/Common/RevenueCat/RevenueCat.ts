@@ -19,7 +19,7 @@
 
 import { Platform } from "react-native";
 import Purchases, { PRODUCT_CATEGORY, PurchasesStoreProduct } from "react-native-purchases";
-import { CreateError, ExecuteWithTimeoutAsync, SafeArrayLength, TimeOutErrorObject, ToCanPrint, ToCanPrintError, UnknownErrorObject } from "../UtilsTS";
+import { CreateError, ExecuteWithTimeoutAsync, IsValuableArrayOrString, SafeArrayLength, TimeOutErrorObject, ToCanPrint, ToCanPrintError, UnknownErrorObject } from "../UtilsTS";
 import { RevenueCat_Android, RevenueCat_iOS } from "../../../Keys";
 import { GetArrayAsync, SetArrayAsync } from "../AsyncStorageUtils";
 import { StorageKey_RevenueCatPackages } from "../../App/Constants/StorageKey";
@@ -27,7 +27,6 @@ import { FirebaseDatabaseTimeOutMs } from "../Firebase/FirebaseDatabase";
 import { AllIAPProducts } from "../SpecificConstants";
 import { UserID } from "../UserID";
 import { Cheat } from "../Cheat";
-import { IAPProduct } from "../SpecificType";
 
 const IsLog = __DEV__
 
@@ -84,7 +83,7 @@ export class RevenueCat {
 
         // load products
 
-        const productsOrError = await this.GetProductsAsync(AllIAPProducts);
+        const productsOrError = await this.FetchAllProductsWithCheckLocalCacheAsync();
 
         // error load products
 
@@ -124,30 +123,39 @@ export class RevenueCat {
     }
 
     /**
+     * ### note: only for getting ALL PRODUCTS
+     * 
+     * how it works:
+     * 
+     * * try get from store first.
+     * 
+     * * fail? try to get local
      * @returns [{"currencyCode": "VND", "description": "500 Downloads", "discounts": [], "identifier": "elephy_1_usd", "introPrice": null, "price": 29000, "priceString": "29.000đ", "productCategory": "NON_SUBSCRIPTION", "productType": "CONSUMABLE", "subscriptionPeriod": null, "title": "500 Downloads"}]
      */
-    static GetProductsAsync = async (allIAPProducts: IAPProduct[]): Promise<PurchasesStoreProduct[] | Error> => {
+    static FetchAllProductsWithCheckLocalCacheAsync = async (): Promise<PurchasesStoreProduct[] | Error> => {
         // init
 
         this.CheckInit()
 
-        // get from local
-
-        const localProducts = await GetArrayAsync<PurchasesStoreProduct>(StorageKey_RevenueCatPackages)
-
-        if (localProducts && SafeArrayLength(localProducts) === allIAPProducts.length) {
-            if (IsLog) console.log('[RevenueCat] GetProductsAsync success from LOCAL, products count', SafeArrayLength(localProducts), localProducts.map(i => i.identifier).join('|'));
-            return localProducts
-        }
-
         // get from store
 
         const res = await ExecuteWithTimeoutAsync(
-            async () => await Purchases.getProducts(allIAPProducts.map(i => i.sku), PRODUCT_CATEGORY.NON_SUBSCRIPTION),
+            async () => await Purchases.getProducts(AllIAPProducts.map(i => i.sku), PRODUCT_CATEGORY.NON_SUBSCRIPTION),
             FirebaseDatabaseTimeOutMs
         )
 
-        // error
+        // fail => try get from local
+
+        if (!IsValuableArrayOrString(res.result)) {
+            const localProducts = await GetArrayAsync<PurchasesStoreProduct>(StorageKey_RevenueCatPackages)
+
+            if (localProducts && SafeArrayLength(localProducts) === AllIAPProducts.length) {
+                if (IsLog) console.log('[RevenueCat] GetProductsAsync success from LOCAL, products count', SafeArrayLength(localProducts), localProducts.map(i => i.identifier).join('|'));
+                return localProducts
+            }
+        }
+
+        // errors
 
         if (res.isTimeOut) {
             if (IsLog) console.log('[RevenueCat] GetProductsAsync error timeout')
@@ -160,7 +168,6 @@ export class RevenueCat {
         }
 
         // sucess, save local
-
 
         const products = res.result
 

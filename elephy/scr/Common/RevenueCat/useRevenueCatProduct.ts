@@ -2,28 +2,25 @@
 
 import { useEffect, useState } from "react"
 import { PurchasesStoreProduct } from "react-native-purchases"
-import { RevenueCat } from "./RevenueCat"
 import { IAPProduct } from "../SpecificType"
 
 // Created Oct 2024 (coding Elephy)
 
 // Setup: RevenueCat.ts
 
-export const useRevenueCatProduct = (products: IAPProduct[]) => {
-    const [fetchedProducts, setFetchedProducts] = useState<PurchasesStoreProduct[] | undefined>()
+export const useRevenueCatProduct = (product: IAPProduct) => {
+    const [fetchedProduct, setFetchedProduct] = useState<PurchasesStoreProduct | undefined>()
 
     useEffect(() => {
         (async () => {
-            
-            
-            const items = await RevenueCat.GetProductsAsync(products)
+            // const items = await RevenueCat.GetAllProductsWithCheckLocalCacheAsync([product])
 
-            if (Array.isArray(items))
-                setFetchedProducts(items)
+            // if (Array.isArray(items))
+            //     setFetchedProduct(items)
 
-            console.log(items);
+            // console.log(items);
         })()
     }, [])
 
-    return products
+    return fetchedProduct
 }
