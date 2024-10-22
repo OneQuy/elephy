@@ -65,7 +65,6 @@ export class RevenueCat {
         // });
     }
 
-
     /**
      * @returns undefined if success
      * @returns null if user cancelled
@@ -124,6 +123,9 @@ export class RevenueCat {
         }
     }
 
+    /**
+     * @returns [{"currencyCode": "VND", "description": "500 Downloads", "discounts": [], "identifier": "elephy_1_usd", "introPrice": null, "price": 29000, "priceString": "29.000đ", "productCategory": "NON_SUBSCRIPTION", "productType": "CONSUMABLE", "subscriptionPeriod": null, "title": "500 Downloads"}]
+     */
     static GetProductsAsync = async (allIAPProducts: IAPProduct[]): Promise<PurchasesStoreProduct[] | Error> => {
         // init
 
