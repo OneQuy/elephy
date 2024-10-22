@@ -17,7 +17,7 @@ export const HandleCountAfterDownloadSuccessAsync = async (): Promise<void> => {
 
     const i  =await IncreaseNumberAsync_WithCheckAndResetNewDay(StorageKey_DownloadApp_TodayTotalDownloadedSuccessCount, 0, 1)
 
-    console.log('aaa', i);
+    // console.log('aaa', i);
     
 }
 
