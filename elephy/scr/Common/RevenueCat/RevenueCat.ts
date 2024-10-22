@@ -132,7 +132,7 @@ export class RevenueCat {
      * * fail? try to get local
      * @returns [{"currencyCode": "VND", "description": "500 Downloads", "discounts": [], "identifier": "elephy_1_usd", "introPrice": null, "price": 29000, "priceString": "29.000đ", "productCategory": "NON_SUBSCRIPTION", "productType": "CONSUMABLE", "subscriptionPeriod": null, "title": "500 Downloads"}]
      */
-    static FetchAllProductsWithCheckLocalCacheAsync = async (): Promise<PurchasesStoreProduct[] | Error> => {
+    static FetchAllProductsWithCheckLocalCacheAsync = async (category = PRODUCT_CATEGORY.NON_SUBSCRIPTION): Promise<PurchasesStoreProduct[] | Error> => {
         // init
 
         this.CheckInit()
@@ -140,7 +140,7 @@ export class RevenueCat {
         // get from store
 
         const res = await ExecuteWithTimeoutAsync(
-            async () => await Purchases.getProducts(AllIAPProducts.map(i => i.sku), PRODUCT_CATEGORY.NON_SUBSCRIPTION),
+            async () => await Purchases.getProducts(AllIAPProducts.map(i => i.sku), category),
             FirebaseDatabaseTimeOutMs
         )
 

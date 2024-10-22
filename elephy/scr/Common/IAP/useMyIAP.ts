@@ -1,6 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { FetchListProductsAsync, IAPProduct, InitIAPAsync } from "./IAP"
-import { Product } from "react-native-iap"
 
 /**
  * 
