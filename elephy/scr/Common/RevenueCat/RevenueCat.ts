@@ -127,7 +127,7 @@ export class RevenueCat {
      * 
      * how it works:
      * 
-     * * try get from store first.
+     * * try get from store first (if success backup to local)
      * 
      * * fail? try to get local
      * @returns [{"currencyCode": "VND", "description": "500 Downloads", "discounts": [], "identifier": "elephy_1_usd", "introPrice": null, "price": 29000, "priceString": "29.000đ", "productCategory": "NON_SUBSCRIPTION", "productType": "CONSUMABLE", "subscriptionPeriod": null, "title": "500 Downloads"}]
