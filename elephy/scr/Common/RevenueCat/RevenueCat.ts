@@ -52,16 +52,7 @@ export class RevenueCat {
             Purchases.configure({ apiKey: APIKeys.apple, appUserID: UserID() });
         }
 
-        // Use more logging during debug if want!
         // Purchases.setLogLevel(LOG_LEVEL.DEBUG);
-
-        // // Listen for customer updates
-        // Purchases.addCustomerInfoUpdateListener(async (info) => {
-        //     // if (IsLog) console.log(info);
-
-        //     let s = await Clipboard.getString()
-        //     Clipboard.setString(s + "\n" + "listener: " + ToCanPrint(info))
-        // });
     }
 
     /**
