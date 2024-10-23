@@ -23,6 +23,7 @@ import { AppName } from '../../Common/SpecificConstants';
 import { GetDisplayDownloadAvailableCountAsync, HandleCountAfterDownloadSuccessAsync } from '../AppUtils';
 import IAPView from '../Components/IAPView';
 import { useRevenueCatProduct } from '../../Common/RevenueCat/useRevenueCatProduct';
+import { CanNotSetupUserData, PopupTitleError } from '../Hooks/useLocalText';
 
 const TutorialText = 'Just copy your Youtube, Tiktok, Instagram,... link and tap Paste!'
 
@@ -207,7 +208,11 @@ const DownloadAllScreen = ({
 
 
     const onPressNumberDownloadAvailableCount = () => {
-        set_showIAPPopup(true)
+        if (fetchedAllProducts)
+            set_showIAPPopup(true)
+        else {
+            Alert.alert(PopupTitleError, CanNotSetupUserData)
+        }
     }
 
     const onPressPasteAndDownloadAsync = async (quantity: number = 100) => {
