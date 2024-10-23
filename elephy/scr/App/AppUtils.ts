@@ -20,6 +20,10 @@ export const HandleCountAfterDownloadSuccessAsync = async (): Promise<void> => {
     // console.log('aaa', i);
 }
 
+export const AddDownloads = async (add: number): Promise<void> => {
+    await IncreaseNumberAsync(StorageKey_DownloadApp_BoughtDowloadCountRemain, 0, add)
+}
+
 export const GetDisplayDownloadAvailableCountAsync = async (): Promise<number> => {
     const boughtDowloadCountRemain = await GetNumberIntAsync(StorageKey_DownloadApp_BoughtDowloadCountRemain, 0)
 
@@ -32,6 +36,6 @@ export const GetDisplayDownloadAvailableCountAsync = async (): Promise<number> =
     const todayTotalDownloadedSuccessCount = await GetNumberIntAsync_WithCheckAndResetNewDay(StorageKey_DownloadApp_TodayTotalDownloadedSuccessCount, 0)
 
     // console.log(dailyFreeDownloadCount,  todayTotalDownloadedSuccessCount);
-    
+
     return Math.max(0, dailyFreeDownloadCount - todayTotalDownloadedSuccessCount)
 }

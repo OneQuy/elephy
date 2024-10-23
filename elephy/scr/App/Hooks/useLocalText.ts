@@ -20,7 +20,7 @@ const eng = {
   rate: 'Rate',
   restore: 'Restore',
   upgrade: "Upgrade",
-  purchase_success: 'You have just upgraded successfully!\n\nThank you for purchasing. You unlocked all vocabularies and features of Vocaby!',
+  purchase_success: 'Added ### downloads!\nThank you for purchasing.',
   about: 'About',
   contact_dev: 'Contact the developer',
   community: 'Community',

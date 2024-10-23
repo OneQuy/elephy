@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BottomSheetView } from '@gorhom/bottom-sheet';
 import { PurchasesStoreProduct } from 'react-native-purchases';
 import { RevenueCat } from '../../Common/RevenueCat/RevenueCat';
+import useLocalText from '../Hooks/useLocalText';
 
 const WindowMaxSize = GetWindowSize_Max()
 
@@ -21,6 +22,7 @@ const IAPView = ({
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
     const [handlingProduct, setHandlingProduct] = useState<PurchasesStoreProduct | undefined>()
+    const texts = useLocalText()
 
     const onPressPurchaseAsync = async (product: PurchasesStoreProduct) => {
         if (handlingProduct)
@@ -30,7 +32,12 @@ const IAPView = ({
         
         const res = await RevenueCat.PurchaseAsync(product)
         
-        Alert.alert('Result', ToCanPrint(res));
+        if (res === undefined) { // success
+            // Alert.alert('Yahooo!', texts.purchase_success.replace
+        }
+        else if (res !==  null) { // error
+            Alert.alert('Error', ToCanPrint(res));
+        }
         
         setHandlingProduct(undefined)
     }
