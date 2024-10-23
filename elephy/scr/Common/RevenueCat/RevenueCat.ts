@@ -141,7 +141,7 @@ export class RevenueCat {
             const localProducts = await GetArrayAsync<PurchasesStoreProduct>(StorageKey_RevenueCatPackages)
 
             if (localProducts && SafeArrayLength(localProducts) === AllIAPProducts.length) {
-                if (IsLog) console.log('[RevenueCat] GetProductsAsync success from LOCAL, products count', SafeArrayLength(localProducts), localProducts.map(i => i.identifier).join('|'));
+                if (IsLog) console.log('[RevenueCat] SUCCESS FetchAllProductsWithCheckLocalCacheAsync from LOCAL, products count', SafeArrayLength(localProducts), localProducts.map(i => i.identifier).join('|'));
                 return localProducts
             }
         }

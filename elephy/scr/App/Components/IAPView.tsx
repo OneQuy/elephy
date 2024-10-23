@@ -19,7 +19,7 @@ const IAPView = ({
     }) => {
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
-    const products = useRevenueCatProduct(AllIAPProducts[0])
+    const { fetchedAllProducts, fetchedTargetProduct } = useRevenueCatProduct(AllIAPProducts[0])
 
     return (
         <BottomSheetView style={{
@@ -53,10 +53,11 @@ const IAPView = ({
             </Text>
 
             {
-                AllIAPProducts.map((iap) => {
+                fetchedAllProducts &&
+                fetchedAllProducts.map((iap) => {
                     return (
                         < TouchableOpacity
-                            key={iap.sku}
+                            key={iap.identifier}
                             style={{
                                 padding: Outline.Big,
                                 minHeight: WindowMaxSize * 0.08,
@@ -73,14 +74,14 @@ const IAPView = ({
                                     fontSize: WindowMaxSize * 0.03,
                                     fontWeight: 'bold',
                                 }}>
-                                +{iap.displayName}
+                                +{iap.title}
                             </Text>
                             <Text
                                 style={{
                                     color: scheme !== 'dark' ? Color_Text : Color_BG,
                                     fontSize: WindowMaxSize * 0.03,
                                 }}>
-                                10.000đ
+                                {iap.priceString}
                             </Text>
                         </TouchableOpacity>
                     )
