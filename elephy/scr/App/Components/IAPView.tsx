@@ -86,9 +86,9 @@ const IAPView = ({
                                 style={{
                                     color: scheme !== 'dark' ? Color_Text : Color_BG,
                                     fontSize: WindowMaxSize * 0.03,
-                                    fontWeight: 'bold',
+                                    fontWeight: '300',
                                 }}>
-                                +{iap.title}
+                                +{iap.description}
                             </Text>
                             {
                                 handling ?
@@ -96,7 +96,8 @@ const IAPView = ({
                                     <Text
                                         style={{
                                             color: scheme !== 'dark' ? Color_Text : Color_BG,
-                                            fontSize: WindowMaxSize * 0.03,
+                                            fontSize: WindowMaxSize * 0.02,
+                                            fontWeight: 'bold'
                                         }}>
                                         {iap.priceString}
                                     </Text>
