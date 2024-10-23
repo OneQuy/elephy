@@ -1,12 +1,11 @@
 import React, { } from 'react';
-import { Text, TouchableOpacity, useColorScheme } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, useColorScheme } from 'react-native';
 import { BorderRadius, Gap, Outline } from '../Constants/Constants_Outline';
 import { GetWindowSize_Max } from '../../Common/UtilsTS';
 import { Color_BG, Color_Text } from '../Hooks/useTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BottomSheetView } from '@gorhom/bottom-sheet';
-import { AllIAPProducts } from '../../Common/SpecificConstants';
-import { useRevenueCatProduct } from '../../Common/RevenueCat/useRevenueCatProduct';
+import { PurchasesStoreProduct } from 'react-native-purchases';
 
 const WindowMaxSize = GetWindowSize_Max()
 
@@ -15,11 +14,28 @@ const IntroText = `⭐ Add a set number of downloads with no expiration.
 ⭐ Only count when the file is downloaded or shared successfully.`
 
 const IAPView = ({
+    fetchedAllProducts
 }: {
-    }) => {
+    fetchedAllProducts: PurchasesStoreProduct[]
+}) => {
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
-    const { fetchedAllProducts, fetchedTargetProduct } = useRevenueCatProduct(AllIAPProducts[0])
+
+    // console.log(fetchedTargetProduct);
+
+    if (!fetchedAllProducts) {
+        return (
+            <BottomSheetView style={{
+                flex: 1,
+                padding: Outline.Normal,
+                paddingBottom: Math.max(insets.bottom, 100),
+                gap: Gap.Normal,
+            }}
+            >
+                <ActivityIndicator />
+            </BottomSheetView>
+        )
+    }
 
     return (
         <BottomSheetView style={{
@@ -53,7 +69,6 @@ const IAPView = ({
             </Text>
 
             {
-                fetchedAllProducts &&
                 fetchedAllProducts.map((iap) => {
                     return (
                         < TouchableOpacity

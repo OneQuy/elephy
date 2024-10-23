@@ -22,6 +22,7 @@ import { DeleteTempDirAsync } from '../../Common/FileUtils';
 import { AppName } from '../../Common/SpecificConstants';
 import { GetDisplayDownloadAvailableCountAsync, HandleCountAfterDownloadSuccessAsync } from '../AppUtils';
 import IAPView from '../Components/IAPView';
+import { useRevenueCatProduct } from '../../Common/RevenueCat/useRevenueCatProduct';
 
 const TutorialText = 'Just copy your Youtube, Tiktok, Instagram,... link and tap Paste!'
 
@@ -94,6 +95,8 @@ const DownloadAllScreen = ({
     const scheme = useColorScheme()
     const bottomSheetRef_DownloadResult = useRef<BottomSheet>(null);
     const bottomSheetRef_IAP = useRef<BottomSheet>(null);
+
+    const { fetchedAllProducts } = useRevenueCatProduct()
 
     const showingAnyPopup = showPopupSelectFileDownload || showIAPPopup
 
@@ -567,7 +570,7 @@ const DownloadAllScreen = ({
 
             {/* iap popup */}
             {
-                showIAPPopup &&
+                showIAPPopup && fetchedAllProducts &&
                 <BottomSheet
                     ref={bottomSheetRef_IAP}
                     onChange={handleBottomSheetChanges_IAP}
@@ -576,7 +579,7 @@ const DownloadAllScreen = ({
                         backgroundColor: HexToRgb(scheme === 'dark' ? Color_Text : Color_BG, 0.3),
                     }}
                 >
-                    <IAPView />
+                    <IAPView fetchedAllProducts={fetchedAllProducts} />
                 </BottomSheet>
             }
 

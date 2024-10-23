@@ -19,7 +19,7 @@ const DownloadResultView = ({
     // console.log('data', typeof data, data);
 
     const [downloadingAllPercentTxt, set_downloadingAllPercentTxt] = useState<string | undefined>()
-
+    
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
 

@@ -10,7 +10,7 @@ import { PRODUCT_CATEGORY, PurchasesStoreProduct } from "react-native-purchases"
 import { RevenueCat } from "./RevenueCat"
 import { IsValuableArrayOrString } from "../UtilsTS"
 
-export const useRevenueCatProduct = (targetProduct: IAPProduct | string, category?: PRODUCT_CATEGORY): {
+export const useRevenueCatProduct = (targetProduct?: IAPProduct | string, category?: PRODUCT_CATEGORY): {
     fetchedAllProducts: undefined | PurchasesStoreProduct[],
     fetchedTargetProduct: undefined | PurchasesStoreProduct,
     fetchedError: undefined | Error,
@@ -34,6 +34,8 @@ export const useRevenueCatProduct = (targetProduct: IAPProduct | string, categor
     }, [fetchedAllProducts, targetProduct])
 
     const fetchListProducts = useCallback(async () => {
+        console.log('fetching list all products...');
+        
         const itemsOrError = await RevenueCat.FetchAllProductsWithCheckLocalCacheAsync(category)
 
         if (Array.isArray(itemsOrError)) {
