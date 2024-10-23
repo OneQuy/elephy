@@ -24,12 +24,12 @@ export const AllIAPProducts: IAPProduct[] = [
     {
         sku: 'elephy_1_usd',
         isConsumable: true,
-        displayName: '500 Downloads'
+        displayName: 'Standard Pack'
     },
     {
         sku: 'elephy_10_usd',
         isConsumable: true,
-        displayName: '5000 Downloads'
+        displayName: 'Mega pack'
     },
 ]
 
