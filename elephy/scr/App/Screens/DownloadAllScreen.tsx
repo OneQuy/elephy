@@ -462,7 +462,7 @@ const DownloadAllScreen = ({
                                     name={'XSquare'}
                                     size={WindowMaxSize * 0.05}
                                     strokeWidth={1.5}
-                                    color={HexToRgb('#ffffff', 0.5)}
+                                    color={HexToRgb('#808080', 0.5)}
                                 />
                             }
 
@@ -470,7 +470,7 @@ const DownloadAllScreen = ({
                                 style={{
                                     textAlign: 'left',
                                     fontSize: WindowMaxSize * 0.025,
-                                    color: HexToRgb('#ffffff', 0.5),
+                                    color: HexToRgb('#808080', 0.5),
                                 }}>
                                 {TutorialText}
                             </Text>
