@@ -466,8 +466,6 @@ const DownloadAllScreen = ({
                             }
 
                             <Text
-                                adjustsFontSizeToFit
-                                numberOfLines={2}
                                 style={{
                                     textAlign: 'left',
                                     fontSize: WindowMaxSize * 0.025,
@@ -544,9 +542,6 @@ const DownloadAllScreen = ({
                 {
                     rapidApiLimit && IsDev() &&
                     <Text
-                        adjustsFontSizeToFit
-                        numberOfLines={1}
-
                         style={{
                             opacity: showingAnyPopup ? 0 : 1,
                             textAlign: 'left',
