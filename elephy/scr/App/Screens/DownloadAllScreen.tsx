@@ -25,7 +25,7 @@ import IAPView from '../Components/IAPView';
 import { useRevenueCatProduct } from '../../Common/RevenueCat/useRevenueCatProduct';
 import { CanNotSetupUserData, PopupTitleError } from '../Hooks/useLocalText';
 
-const TutorialText = 'Just copy your Youtube, Tiktok, Instagram,... link and tap Paste!'
+const TutorialText = 'Just copy your Youtube, Tiktok, Instagram, Facebook,... video or image link and tap Paste!'
 
 const WindowMaxSize = GetWindowSize_Max()
 
@@ -461,6 +461,7 @@ const DownloadAllScreen = ({
                                     onTouchEnd={onPressCloseTutorialText}
                                     name={'XSquare'}
                                     size={WindowMaxSize * 0.05}
+                                    strokeWidth={1.5}
                                     color={HexToRgb('#ffffff', 0.5)}
                                 />
                             }
@@ -500,6 +501,7 @@ const DownloadAllScreen = ({
                                 onTouchEnd={onPressCloseErrorText}
                                 name={'OctagonX'}
                                 size={WindowMaxSize * 0.04}
+                                strokeWidth={1.5}
                                 color={Color_BG}
                             />
                         }
