@@ -1,11 +1,12 @@
-import React, { } from 'react';
-import { ActivityIndicator, Text, TouchableOpacity, useColorScheme } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, Alert, Text, TouchableOpacity, useColorScheme } from 'react-native';
 import { BorderRadius, Gap, Outline } from '../Constants/Constants_Outline';
-import { GetWindowSize_Max } from '../../Common/UtilsTS';
+import { GetWindowSize_Max, ToCanPrint } from '../../Common/UtilsTS';
 import { Color_BG, Color_Text } from '../Hooks/useTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BottomSheetView } from '@gorhom/bottom-sheet';
 import { PurchasesStoreProduct } from 'react-native-purchases';
+import { RevenueCat } from '../../Common/RevenueCat/RevenueCat';
 
 const WindowMaxSize = GetWindowSize_Max()
 
@@ -20,21 +21,19 @@ const IAPView = ({
 }) => {
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
+    const [handling, setHandling] = useState(false)
 
-    // console.log(fetchedTargetProduct);
+    const onPressPurchaseAsync = async (product: PurchasesStoreProduct) => {
+        if (handling)
+            return
 
-    if (!fetchedAllProducts) {
-        return (
-            <BottomSheetView style={{
-                flex: 1,
-                padding: Outline.Normal,
-                paddingBottom: Math.max(insets.bottom, 100),
-                gap: Gap.Normal,
-            }}
-            >
-                <ActivityIndicator />
-            </BottomSheetView>
-        )
+        setHandling(true)
+        
+        const res = await RevenueCat.PurchaseAsync(product)
+        
+        Alert.alert('Result', ToCanPrint(res));
+        
+        setHandling(false)
     }
 
     return (
@@ -58,8 +57,6 @@ const IAPView = ({
 
             {/* intro  */}
             <Text
-                // adjustsFontSizeToFit
-                // numberOfLines={2}
                 style={{
                     color: scheme !== 'dark' ? Color_Text : Color_BG,
                     fontSize: WindowMaxSize * 0.02,
@@ -73,6 +70,8 @@ const IAPView = ({
                     return (
                         < TouchableOpacity
                             key={iap.identifier}
+                            disabled={handling}
+                            onPress={() => onPressPurchaseAsync(iap)}
                             style={{
                                 padding: Outline.Big,
                                 minHeight: WindowMaxSize * 0.08,
@@ -91,13 +90,17 @@ const IAPView = ({
                                 }}>
                                 +{iap.title}
                             </Text>
-                            <Text
-                                style={{
-                                    color: scheme !== 'dark' ? Color_Text : Color_BG,
-                                    fontSize: WindowMaxSize * 0.03,
-                                }}>
-                                {iap.priceString}
-                            </Text>
+                            {
+                                handling ?
+                                    <ActivityIndicator /> :
+                                    <Text
+                                        style={{
+                                            color: scheme !== 'dark' ? Color_Text : Color_BG,
+                                            fontSize: WindowMaxSize * 0.03,
+                                        }}>
+                                        {iap.priceString}
+                                    </Text>
+                            }
                         </TouchableOpacity>
                     )
                 })
