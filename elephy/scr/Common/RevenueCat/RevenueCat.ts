@@ -28,7 +28,8 @@ import { AllIAPProducts } from "../SpecificConstants";
 import { UserID } from "../UserID";
 import { Cheat } from "../Cheat";
 
-const IsLog = __DEV__
+// const IsLog = __DEV__
+const IsLog = false
 
 const APIKeys = {
     apple: RevenueCat_iOS,
