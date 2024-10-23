@@ -65,6 +65,7 @@ export type RemoteConfig = { // CHANGE OPTIONAL
     // specific app
 
     dailyFreeDownloadCount?: number,
+    additionalDownloads?: string,
 }
 
 export type TruelyValueType = number | string | object | boolean
