@@ -19,7 +19,7 @@
 
 import { Platform } from "react-native";
 import Purchases, { PRODUCT_CATEGORY, PurchasesStoreProduct } from "react-native-purchases";
-import { CreateError, ExecuteWithTimeoutAsync, IsValuableArrayOrString, SafeArrayLength, TimeOutErrorObject, ToCanPrint, ToCanPrintError, UnknownErrorObject } from "../UtilsTS";
+import { CreateError, ExecuteWithTimeoutAsync, IsValuableArrayOrString, SafeArrayLength, SafeValue, TimeOutErrorObject, ToCanPrint, ToCanPrintError, UnknownErrorObject } from "../UtilsTS";
 import { RevenueCat_Android, RevenueCat_iOS } from "../../../Keys";
 import { GetArrayAsync, SetArrayAsync } from "../AsyncStorageUtils";
 import { StorageKey_RevenueCatPackages } from "../../App/Constants/StorageKey";
@@ -27,6 +27,7 @@ import { FirebaseDatabaseTimeOutMs } from "../Firebase/FirebaseDatabase";
 import { AllIAPProducts } from "../SpecificConstants";
 import { UserID } from "../UserID";
 import { Cheat } from "../Cheat";
+import { IAPProduct } from "../SpecificType";
 
 // const IsLog = __DEV__
 const IsLog = false
@@ -61,11 +62,18 @@ export class RevenueCat {
      * @returns null if user cancelled
      * @returns otherwise Error()
      */
-    static PurchaseAsync = async (sku: string): Promise<Error | undefined | null> => {
+    static PurchaseAsync = async (productOrId: string | IAPProduct | PurchasesStoreProduct): Promise<Error | undefined | null> => {
         if (Cheat('force_iap_success')) {
             if (IsLog) console.log('[RevenueCat] CHEAT SUCCESS')
             return undefined
         }
+
+        let sku
+
+        if (typeof productOrId === 'string')
+            sku = productOrId
+        else
+            sku = SafeValue((productOrId as IAPProduct).sku, (productOrId as PurchasesStoreProduct).identifier)
 
         if (IsLog) console.log('[RevenueCat] purchasing....', sku)
 
