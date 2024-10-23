@@ -11,7 +11,6 @@ import { RevenueCat } from '../../Common/RevenueCat/RevenueCat';
 const WindowMaxSize = GetWindowSize_Max()
 
 const IntroText = `⭐ Add a set number of downloads with no expiration.
-
 ⭐ Only count when the file is downloaded or shared successfully.`
 
 const IAPView = ({
@@ -49,7 +48,7 @@ const IAPView = ({
                 style={{
                     color: scheme !== 'dark' ? Color_Text : Color_BG,
                     fontSize: WindowMaxSize * 0.03,
-                    fontWeight: 'bold',
+                    fontWeight: '600',
                     textAlign: 'center',
                 }}>
                 Additional Downloads
@@ -97,7 +96,7 @@ const IAPView = ({
                                         style={{
                                             color: scheme !== 'dark' ? Color_Text : Color_BG,
                                             fontSize: WindowMaxSize * 0.02,
-                                            fontWeight: 'bold'
+                                            fontWeight: '600'
                                         }}>
                                         {iap.priceString}
                                     </Text>
