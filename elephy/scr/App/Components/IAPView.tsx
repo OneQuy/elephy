@@ -73,7 +73,7 @@ const IAPView = ({
                             onPress={() => onPressPurchaseAsync(iap)}
                             style={{
                                 padding: Outline.Big,
-                                minHeight: WindowMaxSize * 0.08,
+                                minHeight: WindowMaxSize * 0.07,
                                 backgroundColor: scheme === 'dark' ? Color_Text : Color_BG,
                                 borderRadius: BorderRadius.Normal,
                                 flexDirection: 'row',
@@ -86,7 +86,7 @@ const IAPView = ({
                                 style={{
                                     color: scheme !== 'dark' ? Color_Text : Color_BG,
                                     fontSize: WindowMaxSize * 0.03,
-                                    fontWeight: '300',
+                                    fontWeight: '200',
                                 }}>
                                 +{iap.description}
                             </Text>
@@ -100,7 +100,7 @@ const IAPView = ({
                                         style={{
                                             color: scheme !== 'dark' ? Color_Text : Color_BG,
                                             fontSize: WindowMaxSize * 0.02,
-                                            fontWeight: '600'
+                                            fontWeight: '500'
                                         }}>
                                         {iap.priceString}
                                     </Text>
