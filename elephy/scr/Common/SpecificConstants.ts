@@ -20,16 +20,17 @@ export const ShareAppContent =
     `${ShortLink}`
 
 
+export const ProductId_Standard = 'elephy_1_usd'
+export const ProductId_Mega = 'elephy_10_usd'
+
 export const AllIAPProducts: IAPProduct[] = [
     {
-        sku: 'elephy_1_usd',
+        sku: ProductId_Standard,
         isConsumable: true,
-        displayName: 'Standard Pack'
     },
     {
-        sku: 'elephy_10_usd',
+        sku: ProductId_Mega,
         isConsumable: true,
-        displayName: 'Mega pack'
     },
 ]
 
