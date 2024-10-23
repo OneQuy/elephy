@@ -344,7 +344,7 @@ const DownloadAllScreen = ({
                         }}
                         onPress={() => changeScreen('about')}
                     >
-                        {AppName}{IsDev() ? '.' : 'F'}
+                        {AppName}{IsDev() ? '.' : ''}
                     </Text>
 
                     <View
