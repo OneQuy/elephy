@@ -98,7 +98,7 @@ const DownloadAllScreen = ({
     const bottomSheetRef_IAP = useRef<BottomSheet>(null);
 
     const { fetchedAllProducts } = useRevenueCatProduct()
-
+    
     const showingAnyPopup = showPopupSelectFileDownload || showIAPPopup
 
     const reset = () => {
