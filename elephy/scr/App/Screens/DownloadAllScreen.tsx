@@ -78,6 +78,12 @@ const joyfulColors = [
     '#5EC8FF', // Bright cyan
 ];
 
+const colors = PickRandomElement([
+    favoriteColors,
+    vintageColors,
+    joyfulColors
+]) ?? []
+
 type Status = 'free' | 'handling'
 
 const DownloadAllScreen = ({
@@ -98,7 +104,7 @@ const DownloadAllScreen = ({
     const bottomSheetRef_IAP = useRef<BottomSheet>(null);
 
     const { fetchedAllProducts } = useRevenueCatProduct()
-    
+
     const showingAnyPopup = showPopupSelectFileDownload || showIAPPopup
 
     const reset = () => {
@@ -304,12 +310,7 @@ const DownloadAllScreen = ({
 
     return (
         <ColorChangingView
-            colors={PickRandomElement([
-                favoriteColors,
-                vintageColors,
-                joyfulColors
-            ]) ?? []}
-
+            colors={colors}
             duration={status === 'handling' ? 300 : 10000}
         >
             <SafeAreaView
