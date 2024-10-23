@@ -34,7 +34,7 @@ export const useRevenueCatProduct = (targetProduct?: IAPProduct | string, catego
     }, [fetchedAllProducts, targetProduct])
 
     const fetchListProducts = useCallback(async () => {
-        console.log('fetching list all products...');
+        // console.log('fetching list all products...');
         
         const itemsOrError = await RevenueCat.FetchAllProductsWithCheckLocalCacheAsync(category)
 
