@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, Text, TouchableOpacity, useColorScheme } from 'react-native';
 import { BorderRadius, Gap, Outline } from '../Constants/Constants_Outline';
 import { GetWindowSize_Max, ToCanPrint } from '../../Common/UtilsTS';
@@ -8,6 +8,9 @@ import { BottomSheetView } from '@gorhom/bottom-sheet';
 import { PurchasesStoreProduct } from 'react-native-purchases';
 import { RevenueCat } from '../../Common/RevenueCat/RevenueCat';
 import useLocalText from '../Hooks/useLocalText';
+import { GetAdditionalDownloadsNumberAsync } from '../AppUtils';
+import { DefaultAdditionalNumbers } from '../Constants/AppConstants';
+import { ProductId_Standard } from '../../Common/SpecificConstants';
 
 const WindowMaxSize = GetWindowSize_Max()
 
@@ -22,6 +25,7 @@ const IAPView = ({
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
     const [handlingProduct, setHandlingProduct] = useState<PurchasesStoreProduct | undefined>()
+    const [additionalNumbers, setAdditionalNumbers] = useState<number[]>(DefaultAdditionalNumbers)
     const texts = useLocalText()
 
     const onPressPurchaseAsync = async (product: PurchasesStoreProduct) => {
@@ -41,6 +45,12 @@ const IAPView = ({
         
         setHandlingProduct(undefined)
     }
+
+    useEffect(() => {
+        (async () => {
+            setAdditionalNumbers(await GetAdditionalDownloadsNumberAsync())
+        })()
+    }, [])
 
     return (
         <BottomSheetView style={{
@@ -95,7 +105,7 @@ const IAPView = ({
                                     fontSize: WindowMaxSize * 0.03,
                                     fontWeight: '200',
                                 }}>
-                                +{iap.description}
+                                +{additionalNumbers[iap.identifier === ProductId_Standard ? 0 : 1]} Downloads
                             </Text>
                             
                             {/* loading / price */}

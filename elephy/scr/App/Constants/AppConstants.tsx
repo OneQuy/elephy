@@ -1,0 +1,1 @@
+export const DefaultAdditionalNumbers = [300, 5000]

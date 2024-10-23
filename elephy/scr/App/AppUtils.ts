@@ -3,6 +3,7 @@ import { GetRemoteConfigWithCheckFetchAsync } from "../Common/RemoteConfig"
 import { ProductId_Standard } from "../Common/SpecificConstants"
 import { IAPProduct } from "../Common/SpecificType"
 import { ExtractAllNumbersInText, IsValuableArrayOrString, SafeArrayLength, SafeValue } from "../Common/UtilsTS"
+import { DefaultAdditionalNumbers } from "./Constants/AppConstants"
 import { StorageKey_DownloadApp_BoughtDowloadCountRemain, StorageKey_DownloadApp_TodayTotalDownloadedSuccessCount } from "./Constants/StorageKey"
 
 export const HandleCountAfterDownloadSuccessAsync = async (): Promise<void> => {
@@ -22,28 +23,18 @@ export const HandleCountAfterDownloadSuccessAsync = async (): Promise<void> => {
     // console.log('aaa', i);
 }
 
-export const GetAdditionalDownloadsNumberAsync = async (product: IAPProduct): Promise<number> => {
-    const returnDefault = () => {
-        if (product.sku === ProductId_Standard)
-            return 300
-        else // mega
-            return 5000
-    }
-
+export const GetAdditionalDownloadsNumberAsync = async (): Promise<number[]> => {
     const config = await GetRemoteConfigWithCheckFetchAsync()
 
     if (!config)
-        return returnDefault()
+        return DefaultAdditionalNumbers
 
     const allNumbers = ExtractAllNumbersInText(config.additionalDownloads)
 
     if (SafeArrayLength(allNumbers) < 2)
-        return returnDefault()
-
-    if (product.sku === ProductId_Standard)
-        return allNumbers[0]
-    else // mega
-        return allNumbers[1]
+        return DefaultAdditionalNumbers
+    else
+        return allNumbers
 }
 
 export const AddDownloadsAsync = async (add: number): Promise<void> => {
