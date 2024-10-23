@@ -20,19 +20,19 @@ const IAPView = ({
 }) => {
     const scheme = useColorScheme()
     const insets = useSafeAreaInsets()
-    const [handling, setHandling] = useState(false)
+    const [handlingProduct, setHandlingProduct] = useState<PurchasesStoreProduct | undefined>()
 
     const onPressPurchaseAsync = async (product: PurchasesStoreProduct) => {
-        if (handling)
+        if (handlingProduct)
             return
 
-        setHandling(true)
+        setHandlingProduct(product)
         
         const res = await RevenueCat.PurchaseAsync(product)
         
         Alert.alert('Result', ToCanPrint(res));
         
-        setHandling(false)
+        setHandlingProduct(undefined)
     }
 
     return (
@@ -69,7 +69,7 @@ const IAPView = ({
                     return (
                         < TouchableOpacity
                             key={iap.identifier}
-                            disabled={handling}
+                            disabled={handlingProduct !== undefined}
                             onPress={() => onPressPurchaseAsync(iap)}
                             style={{
                                 padding: Outline.Big,
@@ -81,6 +81,7 @@ const IAPView = ({
                                 alignItems: 'center',
                             }}
                         >
+                            {/* quatity */}
                             <Text
                                 style={{
                                     color: scheme !== 'dark' ? Color_Text : Color_BG,
@@ -89,9 +90,12 @@ const IAPView = ({
                                 }}>
                                 +{iap.description}
                             </Text>
+                            
+                            {/* loading / price */}
                             {
-                                handling ?
+                                handlingProduct === iap ?
                                     <ActivityIndicator /> :
+                                    // price
                                     <Text
                                         style={{
                                             color: scheme !== 'dark' ? Color_Text : Color_BG,
