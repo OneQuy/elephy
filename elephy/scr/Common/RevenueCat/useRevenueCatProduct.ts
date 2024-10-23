@@ -36,8 +36,10 @@ export const useRevenueCatProduct = (targetProduct: IAPProduct | string, categor
     const fetchListProducts = useCallback(async () => {
         const itemsOrError = await RevenueCat.FetchAllProductsWithCheckLocalCacheAsync(category)
 
-        if (Array.isArray(itemsOrError))
+        if (Array.isArray(itemsOrError)) {
             setFetchedAllProducts(itemsOrError)
+            setFetchedError(undefined)
+        }
         else {
             fetchTimeout.current = setTimeout(fetchListProducts, 1000)
             setFetchedError(itemsOrError)
