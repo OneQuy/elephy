@@ -8,7 +8,7 @@ import { BottomSheetView } from '@gorhom/bottom-sheet';
 import { PurchasesStoreProduct } from 'react-native-purchases';
 import { RevenueCat } from '../../Common/RevenueCat/RevenueCat';
 import useLocalText from '../Hooks/useLocalText';
-import { GetAdditionalDownloadsNumberAsync } from '../AppUtils';
+import { AddDownloadsAsync, GetAdditionalDownloadsNumberAsync } from '../AppUtils';
 import { DefaultAdditionalNumbers } from '../Constants/AppConstants';
 import { ProductId_Standard } from '../../Common/SpecificConstants';
 
@@ -33,16 +33,18 @@ const IAPView = ({
             return
 
         setHandlingProduct(product)
-        
+
         const res = await RevenueCat.PurchaseAsync(product)
-        
+
         if (res === undefined) { // success
-            // Alert.alert('Yahooo!', texts.purchase_success.replace
+            const numToAdd = additionalNumbers[product.identifier === ProductId_Standard ? 0 : 1]
+            Alert.alert('Yahooo!', texts.purchase_success.replace('###', numToAdd.toString()))
+            await AddDownloadsAsync(numToAdd)
         }
-        else if (res !==  null) { // error
+        else if (res !== null) { // error
             Alert.alert('Error', ToCanPrint(res));
         }
-        
+
         setHandlingProduct(undefined)
     }
 
@@ -107,7 +109,7 @@ const IAPView = ({
                                 }}>
                                 +{additionalNumbers[iap.identifier === ProductId_Standard ? 0 : 1]} Downloads
                             </Text>
-                            
+
                             {/* loading / price */}
                             {
                                 handlingProduct === iap ?

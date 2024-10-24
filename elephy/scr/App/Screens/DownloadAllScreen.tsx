@@ -132,8 +132,14 @@ const DownloadAllScreen = ({
     const handleBottomSheetChanges_IAP = useCallback((index: number) => {
         if (index < 0) { // closed bottom sheet
             set_showIAPPopup(false)
+            updateDownloadAvailableCountTextAsync()
         }
     }, [reset]);
+
+
+    const updateDownloadAvailableCountTextAsync = async () => {
+        set_downloadAvailableCount(await GetDisplayDownloadAvailableCountAsync())
+    }
 
     // const downloadToLocal = async (responseText: string, quantity = 100) => {
     //     if (!responseText) {
@@ -275,7 +281,7 @@ const DownloadAllScreen = ({
 
             await HandleCountAfterDownloadSuccessAsync()
 
-            set_downloadAvailableCount(await GetDisplayDownloadAvailableCountAsync())
+            updateDownloadAvailableCountTextAsync()
 
             set_downloadResultViewData(obj)
             set_showPopupSelectFileDownload(true)
@@ -302,8 +308,6 @@ const DownloadAllScreen = ({
     useEffect(() => {
         (async () => {
             set_showTutorialText(await GetBooleanAsync(StorageKey_DownloadApp_ShowTutorialText, true))
-
-            set_downloadAvailableCount(await GetDisplayDownloadAvailableCountAsync())
         })()
     }, [])
 
