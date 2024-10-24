@@ -38,8 +38,8 @@ const IAPView = ({
 
         if (res === undefined) { // success
             const numToAdd = additionalNumbers[product.identifier === ProductId_Standard ? 0 : 1]
+            AddDownloadsAsync(numToAdd)
             Alert.alert('Yahooo!', texts.purchase_success.replace('###', numToAdd.toString()))
-            await AddDownloadsAsync(numToAdd)
         }
         else if (res !== null) { // error
             Alert.alert('Error', ToCanPrint(res));

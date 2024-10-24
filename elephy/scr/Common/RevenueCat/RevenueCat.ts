@@ -57,15 +57,10 @@ export class RevenueCat {
         // Purchases.setLogLevel(LOG_LEVEL.DEBUG);
     }
 
-    /**
-     * @returns undefined if success
-     * @returns null if user cancelled
-     * @returns otherwise Error()
-     */
-    static PurchaseAsync = async (productOrId: string | IAPProduct | PurchasesStoreProduct): Promise<Error | undefined | null> => {
+    static PurchaseAsync = async (productOrId: string | IAPProduct | PurchasesStoreProduct): Promise<Error | 'success' | 'user_cancel'> => {
         if (Cheat('force_iap_success')) {
             if (IsLog) console.log('[RevenueCat] CHEAT SUCCESS')
-            return undefined
+            return 'success'
         }
 
         let sku
@@ -104,14 +99,14 @@ export class RevenueCat {
 
             if (IsLog) console.log('[RevenueCat] purchased success', ToCanPrint(success))
 
-            return undefined // success
+            return 'success' // success
         }
         catch (e) {
             // @ts-ignore // user cancel
 
             if (e && e.userCancelled) {
                 if (IsLog) console.log('[RevenueCat] purchased canceled')
-                return null
+                return 'user_cancel'
             }
 
             // other error

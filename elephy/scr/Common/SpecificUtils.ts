@@ -274,7 +274,7 @@ set_isHandling(false)
 //     let valueTracking = ''
 //     let purchaseSuccess = false
 
-//     const res = await RevenueCat.PurchaseAsync(sku)
+//     const res = await RevenueCat.PurchaseAsyncccc(sku)
 
 //     // success
 
